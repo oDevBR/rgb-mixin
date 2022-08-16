@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 
+import GithubCorner from "react-github-corner";
+
 import { SnackbarContext } from "../contexts/SnackbarContext";
 import Snackbar from "../components/Snackbar";
 
@@ -118,6 +120,7 @@ export default function Home() {
       {snackbarContext.isDisplayed && (
         <Snackbar message="Copiado com sucesso!" />
       )}
+      <GithubCorner href="https://github.com/whisoer/rgb-mixin" />
     </>
   );
 }
