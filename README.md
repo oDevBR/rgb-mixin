@@ -39,7 +39,7 @@
 
 ## 📖 About the project
 
-This is something that I created to practicce the basic frontend technics.
+This is something I created to practice/refresh some basic front-end techniques
 
 ## 🌐 Deploy
 
