@@ -16,14 +16,30 @@ export default function Home() {
   const [showMessage, setShowMessage] = useState(false);
   const snackbarContext = useContext(SnackbarContext);
 
-  const validate = (value) => {
-    if (isNaN(value) || value === "" || value < 0 || value > 255) {
+  const handleInput = (event, setValue) => {
+    const value = event.target.value;
+    if (isNaN(value)) {
       setShowMessage(true);
-      return false;
+      return;
     }
+
+    if (value === "" || value < 0) {
+      setShowMessage(true);
+      setValue(0);
+      return;
+    }
+
+    if (value > 255) {
+      setShowMessage(true);
+      setValue(255);
+      return;
+    }
+
+    setValue(value);
     setShowMessage(false);
-    return true;
   };
+
+  const selectField = (event) => event.target.select();
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(customColor);
@@ -47,7 +63,7 @@ export default function Home() {
 
         <section
           className={styles.section}
-          onClick={(e) => e.stopPropagation()}
+          onClick={(event) => event.stopPropagation()}
         >
           <div className={styles.section_field}>
             <div className={styles.input_form}>
@@ -61,12 +77,8 @@ export default function Home() {
                 type="text"
                 className={styles.input}
                 value={redField}
-                onFocus={(e) => e.target.select()}
-                onChange={(e) => {
-                  if (validate(e.target.value)) {
-                    setRedField(e.target.value);
-                  }
-                }}
+                onFocus={selectField}
+                onChange={(event) => handleInput(event, setRedField)}
               />
             </div>
             <div className={styles.input_form}>
@@ -80,12 +92,8 @@ export default function Home() {
                 type="text"
                 className={styles.input}
                 value={greenField}
-                onFocus={(e) => e.target.select()}
-                onChange={(e) => {
-                  if (validate(e.target.value)) {
-                    setGreenField(e.target.value);
-                  }
-                }}
+                onFocus={selectField}
+                onChange={(event) => handleInput(event, setGreenField)}
               />
             </div>
             <div className={styles.input_form}>
@@ -99,12 +107,8 @@ export default function Home() {
                 type="text"
                 className={styles.input}
                 value={blueField}
-                onFocus={(e) => e.target.select()}
-                onChange={(e) => {
-                  if (validate(e.target.value)) {
-                    setBlueField(e.target.value);
-                  }
-                }}
+                onFocus={selectField}
+                onChange={(event) => handleInput(event, setBlueField)}
               />
             </div>
           </div>
